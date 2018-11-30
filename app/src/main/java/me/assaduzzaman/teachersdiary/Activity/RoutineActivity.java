@@ -1,12 +1,14 @@
 package me.assaduzzaman.teachersdiary.Activity;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -32,7 +34,8 @@ import me.assaduzzaman.teachersdiary.Fragment.SunFragment;
 import me.assaduzzaman.teachersdiary.Fragment.TuesFragment;
 import me.assaduzzaman.teachersdiary.Fragment.WedFragment;
 import me.assaduzzaman.teachersdiary.LocalDatabase.DatabaseHelper;
-import me.assaduzzaman.teachersdiary.Network.NetworkConnection;
+import me.assaduzzaman.teachersdiary.Network.NetworkStatus;
+import me.assaduzzaman.teachersdiary.Notification.NotificationReceiver;
 import me.assaduzzaman.teachersdiary.R;
 import me.assaduzzaman.teachersdiary.model.Routine;
 
@@ -59,6 +62,21 @@ public class RoutineActivity extends AppCompatActivity {
         TabLayout tabLayout=findViewById(R.id.tablayout);
         Toolbar toolbar = findViewById(R.id.toolbarRoutine);
         ViewPager viewPager=findViewById(R.id.view_pager);
+
+
+        //Notifications................................
+        Calendar calendar=Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY,17);
+        calendar.set(Calendar.MINUTE,17);
+        calendar.set(Calendar.SECOND,10);
+        Intent intent=new Intent(getApplicationContext(), NotificationReceiver.class);
+
+        PendingIntent pendingIntent=PendingIntent.getBroadcast(getApplicationContext(),100
+        ,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager= (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),
+                alarmManager.INTERVAL_DAY,pendingIntent);
 
 
 
@@ -102,7 +120,7 @@ public class RoutineActivity extends AppCompatActivity {
 
     public void getData() {
 
-        if (new NetworkConnection().checkNetworkConnection(RoutineActivity.this)) {
+        if (new NetworkStatus().checkNetworkConnection(RoutineActivity.this)) {
 
             allRoutine = new ArrayList<>();
 
