@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <CheckBoxPreference
+        android:title="Get Notifications"
+    android:summary="for getting the notifications on a
+    fix time"
+    android:id="@+id/checkbox">
+
+</CheckBoxPreference>
+
+
+
+
+
+</PreferenceScreen>
