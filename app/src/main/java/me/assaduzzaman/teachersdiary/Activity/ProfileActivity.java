@@ -2,14 +2,11 @@ package me.assaduzzaman.teachersdiary.Activity;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
-
-import me.assaduzzaman.teachersdiary.MainActivity;
 import me.assaduzzaman.teachersdiary.R;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -30,7 +27,6 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         Toolbar toolbar = findViewById(R.id.profile_toolbar);
-        ViewPager viewPager=findViewById(R.id.view_pager);
 
         //setting the toolbar
         setSupportActionBar(toolbar);
@@ -49,7 +45,7 @@ public class ProfileActivity extends AppCompatActivity {
         profileFacultyName=findViewById(R.id.profileFaculty);
 
 
-        // getting the information from the sharepreference...................
+        // getting the information from the sharedPreferences ...................
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(ProfileActivity.this);
         final String name=sharedPreferences.getString("name","0");
         final String email=sharedPreferences.getString("email","0");
@@ -59,11 +55,6 @@ public class ProfileActivity extends AppCompatActivity {
         profileName.setText(name);
         profileEmail.setText(email);
         profileCode.setText(code);
-
-
-
-
-
 
 
     }

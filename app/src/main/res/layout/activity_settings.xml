@@ -3,23 +3,72 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="#FAFAFA"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarSetting"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
-        android:titleTextColor="#ffffff"
-        app:popupTheme="@style/AppTheme.PopupOverlay" />
+        android:theme="@style/AppTheme.AppBarOverlay" />
 
-    <FrameLayout
-        android:id="@+id/settingFrame"
+    <Switch
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/switchNotification"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </FrameLayout>
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:checked="true"
+        android:text="@string/get_notification_everyday" />
+    <View
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#c0c0c0"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <RelativeLayout
+        android:id="@+id/set_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textSize="18sp"
+            android:gravity="center|left"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:text="Set the time for Notification" />
+
+        <TextView
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:id="@+id/settingTime"
+            android:textSize="18sp"
+            android:paddingRight="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="10dp"
+            android:gravity="center|right"
+            android:text="09.30" />
+
+    </RelativeLayout>
+    <View
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#c0c0c0"
+        android:layout_width="match_parent"
+        android:layout_height="1dp">
+
+    </View>
+
 
 
 </LinearLayout>
