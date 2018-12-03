@@ -35,5 +35,8 @@ dependencies {
     //volley library
     implementation 'com.android.volley:volley:1.1.1'
 
+    // git viewer
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.16'
+
 
 }

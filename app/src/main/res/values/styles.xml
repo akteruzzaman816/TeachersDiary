@@ -14,6 +14,13 @@
 
 
     </style>
+    <style name="AppTheme.Launcher">
+        <item name="android:windowBackground">@drawable/spalash_bg</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -22,7 +29,9 @@
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"></style>
+
+
 
 
     <style name="Base.Widget.Design.TabLayout" parent="android:Widget">
@@ -30,6 +39,7 @@
         <item name="tabIndicatorColor">#fff</item>
         <item name="tabIndicatorHeight">3dp</item>
     </style>
+
 
 
 </resources>
