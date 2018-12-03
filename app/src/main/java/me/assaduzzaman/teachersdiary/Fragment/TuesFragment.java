@@ -28,6 +28,7 @@ public class TuesFragment extends Fragment {
     ArrayList<Routine> dataList=new ArrayList<>();
     CustomAdapter customAdapter;
     RecyclerView recyclerView;
+    View catLayout;
 
 
     View v;
@@ -37,12 +38,24 @@ public class TuesFragment extends Fragment {
         v=inflater.inflate(R.layout.tues,container,false);
 
 
+        catLayout=v.findViewById(R.id.tues_cat);
+
         recyclerView=v.findViewById(R.id.recyclerView_tues);
         dataList=getRoutinetList(getActivity());
 
-        customAdapter=new CustomAdapter(getActivity(),dataList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(customAdapter);
+        if (dataList.size()>0)
+        {
+            catLayout.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+            customAdapter=new CustomAdapter(getActivity(),dataList);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            recyclerView.setAdapter(customAdapter);
+        }
+        else
+        {
+            catLayout.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        }
 
 
         return v;

@@ -27,6 +27,7 @@ public class WedFragment extends Fragment {
     ArrayList<Routine> dataList=new ArrayList<>();
     CustomAdapter customAdapter;
     RecyclerView recyclerView;
+    View catLayout;
 
 
     View v;
@@ -36,12 +37,24 @@ public class WedFragment extends Fragment {
         v=inflater.inflate(R.layout.wed,container,false);
 
 
+        catLayout=v.findViewById(R.id.wed_cat);
+
         recyclerView=v.findViewById(R.id.recyclerView_wed);
         dataList=getRoutinetList(getActivity());
 
-        customAdapter=new CustomAdapter(getActivity(),dataList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(customAdapter);
+        if (dataList.size()>0)
+        {
+            catLayout.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+            customAdapter=new CustomAdapter(getActivity(),dataList);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            recyclerView.setAdapter(customAdapter);
+        }
+        else
+        {
+            catLayout.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        }
 
 
         return v;

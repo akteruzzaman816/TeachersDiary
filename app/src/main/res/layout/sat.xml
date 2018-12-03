@@ -7,6 +7,13 @@
     android:gravity="center"
     android:orientation="vertical">
 
+
+    <include
+        android:visibility="gone"
+        android:id="@+id/sat_cat"
+        layout="@layout/no_schedule">
+    </include>
+
     <android.support.v7.widget.RecyclerView
         android:paddingTop="?attr/actionBarSize"
         android:id="@+id/recyclerView_sat"

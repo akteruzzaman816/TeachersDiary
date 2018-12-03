@@ -27,6 +27,7 @@ public class SunFragment extends Fragment {
     ArrayList<Routine> dataList;
     CustomAdapter  customAdapter;
     RecyclerView recyclerView;
+    View catLayout;
 
 
     View v;
@@ -36,13 +37,24 @@ public class SunFragment extends Fragment {
         v=inflater.inflate(R.layout.sun,container,false);
 
 
+        catLayout=v.findViewById(R.id.sun_cat);
+
         recyclerView=v.findViewById(R.id.recyclerView_sun);
         dataList=getRoutinetList(getActivity());
 
-        customAdapter=new CustomAdapter(getActivity(),dataList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(customAdapter);
-
+        if (dataList.size()>0)
+        {
+            catLayout.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+            customAdapter=new CustomAdapter(getActivity(),dataList);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            recyclerView.setAdapter(customAdapter);
+        }
+        else
+        {
+            catLayout.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        }
 
 
 

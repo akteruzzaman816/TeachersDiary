@@ -27,7 +27,6 @@
     </LinearLayout>
 
     <android.support.v7.widget.CardView
-        android:id="@+id/login_card"
         android:background="@drawable/shadow2"
         app:cardCornerRadius="10dp"
         app:cardElevation="10dp"
@@ -39,7 +38,6 @@
 
 
         <LinearLayout
-            android:id="@+id/layoutInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"

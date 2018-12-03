@@ -2,12 +2,16 @@
     <string name="app_name">Teachers Diary</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
     <string name="logout">Logout</string>
-    <string name="get_notification">Get Notification</string>
     <string name="get_notification_everyday">Get Notification Everyday</string>
     <string name="setting">Setting</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+
+    <!-- Example settings for Data & Sync -->
+
+    <!-- Example settings for Notifications -->
+
 </resources>
