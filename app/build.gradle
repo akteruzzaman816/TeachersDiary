@@ -18,6 +18,9 @@ android {
         }
     }
 }
+repositories {
+    maven { url 'https://jitpack.io' }
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -40,6 +43,10 @@ dependencies {
 
     // git viewer
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.16'
+
+    //pie chart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
+
 
 
 }

@@ -16,7 +16,10 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Activity.LoginActivity"></activity>
+        <activity
+            android:name=".Activity.LoginActivity">
+
+        </activity>
         <activity android:name=".Activity.ProfileActivity" />
         <activity android:name=".Activity.RoutineActivity" />
         <activity android:name=".Activity.SettingsActivity" />
