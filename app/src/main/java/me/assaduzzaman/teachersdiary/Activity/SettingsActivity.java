@@ -40,6 +40,12 @@ public class SettingsActivity extends AppCompatActivity {
         TimeChooser=findViewById(R.id.set_time);
         time=findViewById(R.id.settingTime);
 
+        //get sharedPreferences time information
+        retrivePreferences = PreferenceManager.getDefaultSharedPreferences(SettingsActivity.this);
+        int hour=retrivePreferences.getInt("notifyHour",0);
+        int minute=retrivePreferences.getInt("notifyMinute",0);
+        time.setText(String.valueOf(hour)+"."+String.valueOf(minute));
+
 
 
 
@@ -53,7 +59,6 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
 
-        setNotifications();
 
 
 
@@ -88,20 +93,23 @@ public class SettingsActivity extends AppCompatActivity {
                 int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
                 int minute = mcurrentTime.get(Calendar.MINUTE);
                 TimePickerDialog mTimePicker;
-                mTimePicker = new TimePickerDialog(SettingsActivity.this, new TimePickerDialog.OnTimeSetListener() {
+
+                mTimePicker=new TimePickerDialog(SettingsActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
-                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        time.setText( selectedHour + ":" + selectedMinute);
+                    public void onTimeSet(TimePicker timePicker, int i, int i1) {
 
                         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(SettingsActivity.this);
                         SharedPreferences.Editor editor=sharedPreferences.edit();
-                        editor.putInt("notifyHour",selectedHour);
-                        editor.putInt("notifyMinute",selectedMinute);
+                        editor.putInt("notifyHour",i);
+                        editor.putInt("notifyMinute",i1);
                         editor.apply();
 
+                        time.setText( i + ":" + i1);
+
+                        setNotifications(i,i1);
 
                     }
-                }, hour, minute, true);//Yes 24 hour time
+                },hour,minute,false);
                 mTimePicker.setTitle("Select Time");
                 mTimePicker.show();
 
@@ -115,20 +123,15 @@ public class SettingsActivity extends AppCompatActivity {
 
     }
 
-    private void setNotifications() {
-        //get sharedPreferences time information
-        retrivePreferences = PreferenceManager.getDefaultSharedPreferences(SettingsActivity.this);
-        int hour=retrivePreferences.getInt("notifyHour",0);
-        int minute=retrivePreferences.getInt("notifyMinute",0);
-        time.setText(String.valueOf(hour)+"."+String.valueOf(minute));
+    private void setNotifications(int hour,int minute) {
 
-      //  Toast.makeText(this, String.valueOf(minute), Toast.LENGTH_SHORT).show();
 
-        //Notifications................................
+        //set up for Notifications................................
+        Toast.makeText(this,  "Notification set to "+String.valueOf(hour)+"."+String.valueOf(minute), Toast.LENGTH_SHORT).show();
         Calendar calendar=Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY,hour);
         calendar.set(Calendar.MINUTE,minute);
-        calendar.set(Calendar.MINUTE,10);
+        calendar.set(Calendar.SECOND,0);
 
         Intent intent=new Intent(getApplicationContext(), NotificationReceiver.class);
 
@@ -138,6 +141,8 @@ public class SettingsActivity extends AppCompatActivity {
         AlarmManager alarmManager= (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),
                 alarmManager.INTERVAL_DAY,pendingIntent);
+
+
     }
 
 
