@@ -18,10 +18,15 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.sql.Time;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import me.assaduzzaman.teachersdiary.Notification.NotificationReceiver;
 import me.assaduzzaman.teachersdiary.R;
+
+import static java.util.Calendar.AM_PM;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -42,9 +47,9 @@ public class SettingsActivity extends AppCompatActivity {
 
         //get sharedPreferences time information
         retrivePreferences = PreferenceManager.getDefaultSharedPreferences(SettingsActivity.this);
-        int hour=retrivePreferences.getInt("notifyHour",0);
-        int minute=retrivePreferences.getInt("notifyMinute",0);
-        time.setText(String.valueOf(hour)+"."+String.valueOf(minute));
+
+        String preferencesTime=retrivePreferences.getString("pickerTime","0");
+        time.setText(preferencesTime);
 
 
 
@@ -98,13 +103,36 @@ public class SettingsActivity extends AppCompatActivity {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int i, int i1) {
 
+
+
+
+                        // formating time
+                        String status = "AM";
+
+                        if(i > 11)
+                        {
+                            status = "PM";
+                        }
+                        // Initialize a new variable to hold 12 hour format hour value
+                        int hour_of_12_hour_format;
+
+                        if(i > 11){
+                            hour_of_12_hour_format = i - 12;
+                        }
+                        else {
+                            hour_of_12_hour_format = i;
+                        }
+
+                        String finalTime=hour_of_12_hour_format + " : " + i1 + " : " + status;
+                        time.setText(finalTime);
+
                         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(SettingsActivity.this);
                         SharedPreferences.Editor editor=sharedPreferences.edit();
-                        editor.putInt("notifyHour",i);
-                        editor.putInt("notifyMinute",i1);
+                        editor.putString("pickerTime",finalTime);
                         editor.apply();
 
-                        time.setText( i + ":" + i1);
+                        Toast.makeText(SettingsActivity.this, "Notification set to "+finalTime, Toast.LENGTH_SHORT).show();
+
 
                         setNotifications(i,i1);
 
@@ -127,7 +155,6 @@ public class SettingsActivity extends AppCompatActivity {
 
 
         //set up for Notifications................................
-        Toast.makeText(this,  "Notification set to "+String.valueOf(hour)+"."+String.valueOf(minute), Toast.LENGTH_SHORT).show();
         Calendar calendar=Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY,hour);
         calendar.set(Calendar.MINUTE,minute);

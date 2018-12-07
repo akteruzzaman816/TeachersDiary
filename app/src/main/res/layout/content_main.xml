@@ -55,7 +55,7 @@
                     android:id="@+id/dayDate"
                     android:textColor="@color/white"
                     android:layout_weight="1"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     android:gravity="center"
                     android:text="Sunday - 07/12/18"
                     android:layout_width="0dp"
@@ -76,7 +76,7 @@
                     android:textStyle="bold|italic"
                     android:textSize="25sp"
                     android:gravity="center"
-                    android:text="NO Schedule Today"
+                    android:text="No Schedule Today"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 

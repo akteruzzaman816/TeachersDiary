@@ -22,9 +22,9 @@ public class NotificationReceiver extends BroadcastReceiver {
         int notificationId = 100;
         String channelId = "channel-01";
         String channelName = "Channel Name";
-        int importance = NotificationManager.IMPORTANCE_HIGH;
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            int importance = NotificationManager.IMPORTANCE_HIGH;
             NotificationChannel mChannel = new NotificationChannel(
                     channelId, channelName, importance);
             notificationManager.createNotificationChannel(mChannel);

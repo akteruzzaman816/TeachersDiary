@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity
         Calendar c = Calendar.getInstance();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String currentDate=dateFormat.format(c.getTime());
-        c.set(Calendar.DAY_OF_WEEK,7);
+
 
 
         int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-            dayDate.setText("Saturday"+" - "+currentDate);
+            dayDate.setText("Saturday"+" \n "+currentDate);
 
             ArrayList<Routine> data= getRoutinetData(sirCode,"Saturday");
             if (data.size()>0)
@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (Calendar.SUNDAY == dayOfWeek) {
 
-            dayDate.setText("Sunday"+" - "+currentDate);
+            dayDate.setText("Sunday"+" \n "+currentDate);
 
             ArrayList<Routine> data= getRoutinetData(sirCode,"Sunday");
             if (data.size()>0)
@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (Calendar.MONDAY == dayOfWeek) {
 
-            dayDate.setText("Monday"+" - "+currentDate);
+            dayDate.setText("Monday"+" \n "+currentDate);
 
             ArrayList<Routine> data= getRoutinetData(sirCode,"Monday");
             if (data.size()>0)
@@ -237,7 +237,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (Calendar.TUESDAY == dayOfWeek) {
 
-            dayDate.setText("Tuesday"+" - "+currentDate);
+            dayDate.setText("Tuesday"+" \n "+currentDate);
 
             ArrayList<Routine> data= getRoutinetData(sirCode,"Tuesday");
             if (data.size()>0)
@@ -255,7 +255,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (Calendar.WEDNESDAY == dayOfWeek) {
 
-            dayDate.setText("Wednesday"+" - "+currentDate);
+            dayDate.setText("Wednesday"+" \n "+currentDate);
 
             ArrayList<Routine> data= getRoutinetData(sirCode,"Wednesday");
             if (data.size()>0)
@@ -273,7 +273,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (Calendar.THURSDAY == dayOfWeek) {
 
-            dayDate.setText("Thursday"+" - "+currentDate);
+            dayDate.setText("Thursday"+" \n "+currentDate);
 
             ArrayList<Routine> data= getRoutinetData(sirCode,"Thursday");
             if (data.size()>0)
@@ -291,7 +291,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (Calendar.FRIDAY == dayOfWeek) {
 
-            dayDate.setText("Friday"+" - "+currentDate);
+            dayDate.setText("Friday"+" \n "+currentDate);
 
             ArrayList<Routine> data= getRoutinetData(sirCode,"Friday");
             if (data.size()>0)
