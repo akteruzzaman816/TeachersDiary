@@ -37,6 +37,15 @@ public class Config {
     public static final String COLUMN_COURSE_STATUS = "status";
 
 
+    // Note Table...............
+    public static final String TABLE_NOTE = "note";
+    // Note column Name.................................................
+    public static final String COLUMN_NOTE_ID = "id";
+    public static final String COLUMN_NOTE_TITLE = "title";
+    public static final String COLUMN_NOTE_DETAILS = "detail";
+    public static final String COLUMN_NOTE_DATE= "date";
+
+
 }
 
 

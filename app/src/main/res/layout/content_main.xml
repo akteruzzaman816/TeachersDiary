@@ -21,16 +21,165 @@
 
 
     <LinearLayout
-        android:padding="10dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:layout_marginTop="10dp"
             android:background="@drawable/shadow"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="270dp">
+
+            <LinearLayout
+                android:background="@color/colorPrimary"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize">
+
+                <TextView
+                    android:layout_marginLeft="15dp"
+                    android:id="@+id/dayName"
+                    android:textStyle="bold|italic"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:gravity="center|start"
+                    android:text="DashBoard"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/date"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:textSize="15sp"
+                    android:gravity="center"
+                    android:text="Sunday - 07/12/18"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:layout_marginLeft="15dp"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:textSize="15sp"
+                    android:gravity="center|start"
+                    android:text="Class Starts from"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/classStart"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:textSize="15sp"
+                    android:gravity="center"
+                    android:text="09.30.00"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+            <View
+                android:layout_marginLeft="15sp"
+                android:layout_marginRight="15sp"
+                android:background="@color/lightgray"
+                android:layout_width="match_parent"
+                android:layout_height="2dp">
+            </View>
+
+
+            <!--end class-->
+            <LinearLayout
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:layout_marginLeft="15dp"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:textSize="15sp"
+                    android:gravity="center|start"
+                    android:text="Class End to"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/classEnd"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:textSize="15sp"
+                    android:gravity="center"
+                    android:text="01.30.00"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+            <View
+                android:layout_marginLeft="15sp"
+                android:layout_marginRight="15sp"
+                android:background="@color/lightgray"
+                android:layout_width="match_parent"
+                android:layout_height="2dp">
+            </View>
+
+
+
+            <!--Total class-->
+            <LinearLayout
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:layout_marginLeft="15dp"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:textSize="15sp"
+                    android:gravity="center|start"
+                    android:text="Total Class"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/totalClass"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:textSize="15sp"
+                    android:gravity="center"
+                    android:text="04"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+            <View
+                android:layout_marginLeft="15sp"
+                android:layout_marginRight="15sp"
+                android:background="@color/lightgray"
+                android:layout_width="match_parent"
+                android:layout_height="2dp">
+            </View>
+
+
+
+
+
 
         </LinearLayout>
 
@@ -38,6 +187,7 @@
 
 
         <TextView
+            android:layout_marginLeft="10dp"
             android:padding="5dp"
             android:textColor="@color/colorPrimaryDark"
             style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
@@ -50,6 +200,9 @@
 
 
         <LinearLayout
+            android:paddingRight="5dp"
+            android:paddingLeft="5dp"
+            android:paddingBottom="5dp"
             android:layout_marginTop="2dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
@@ -208,7 +361,9 @@
         <!--2nd row-->
 
         <LinearLayout
-            android:layout_marginTop="2dp"
+            android:paddingBottom="5dp"
+            android:paddingRight="5dp"
+            android:paddingLeft="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_width="match_parent"

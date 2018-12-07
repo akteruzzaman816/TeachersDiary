@@ -16,6 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import me.assaduzzaman.teachersdiary.Adapter.CustomAdapter;
 import me.assaduzzaman.teachersdiary.LocalDatabase.Config;
@@ -80,7 +82,9 @@ public class TuesFragment extends Fragment {
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
 
                 routinelist.add(new Routine(
-                        cursor.getString(cursor.getColumnIndex(Config.COLUMN_TEACHER_CODE)),
+                        cursor.getString(cursor.getColumnIndex(Config.COLUMN_ROUTINE_SEMESTER)),
+                        cursor.getString(cursor.getColumnIndex(Config.COLUMN_ROUTINE_BATCH)),
+                        cursor.getString(cursor.getColumnIndex(Config.COLUMN_ROUTINE_SECTION)),
                         cursor.getString(cursor.getColumnIndex(Config.COLUMN_COURSE_NAME)),
                         cursor.getString(cursor.getColumnIndex(Config.COLUMN_ROUTINE_DAY)),
                         cursor.getString(cursor.getColumnIndex(Config.COLUMN_ROUTINE_TIME)),
@@ -101,6 +105,13 @@ public class TuesFragment extends Fragment {
             db.close();
         }
         Log.e("data3", String.valueOf(routinelist.size()));
+
+        Collections.sort(routinelist, new Comparator<Routine>() {
+            @Override
+            public int compare(Routine routine, Routine t1) {
+                return routine.getRoutineTime().compareTo(t1.getRoutineTime());
+            }
+        });
         return routinelist;
     }
 

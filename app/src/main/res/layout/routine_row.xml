@@ -70,18 +70,38 @@
 
 
             <TextView
-                android:id="@+id/teacher"
+                android:id="@+id/semester"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Teacher" />
+                android:text="Semester" />
 
             <TextView
-                android:id="@+id/subjectTeacher"
+                android:id="@+id/semesterID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/teacher"
-                android:text="MD.Assaduzzaman"
+                android:layout_below="@+id/semester"
+                android:text="7 semester"
                 android:textColor="@color/colorPrimary" />
+
+
+            <!--middle text-->
+            <TextView
+                android:id="@+id/section"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:text="Batch" />
+
+            <TextView
+                android:layout_below="@id/section"
+                android:id="@+id/sectionName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="6th batch"
+                android:textColor="@color/colorPrimary" />
+
 
             <TextView
                 android:id="@+id/room"

@@ -35,7 +35,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        // Create tables SQL execution
+        // Create Routine tables SQL execution................
         String CREATE_STUDENT_TABLE = "CREATE TABLE " + Config.TABLE_ROUTINE + "("
                 + Config.COLUMN_ROUTINE_ID+ " INT, "
                 + Config.COLUMN_TEACHER_CODE + " TEXT, "
@@ -50,7 +50,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + Config.COLUMN_COURSE_CODE + " TEXT, " //nullable
                 + Config.COLUMN_COURSE_STATUS + " INTEGER " //nullable
                 + ")";
+
+
+        // Create Note tables SQL.......................
+        String CREATE_NOTE_TABLE = "CREATE TABLE " + Config.TABLE_NOTE + "("
+                + Config.COLUMN_NOTE_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT , "
+                + Config.COLUMN_NOTE_TITLE + " TEXT, "
+                + Config.COLUMN_NOTE_DETAILS + " TEXT, "
+                + Config.COLUMN_NOTE_DATE + " TEXT "
+                + ")";
+
+
+
+
+        // EXECUTE THE SQL QUERY......................
         db.execSQL(CREATE_STUDENT_TABLE);
+        db.execSQL(CREATE_NOTE_TABLE);
         Log.e("b","created");
 
     }
@@ -59,6 +74,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + Config.TABLE_ROUTINE);
+        db.execSQL("DROP TABLE IF EXISTS " + Config.TABLE_NOTE);
 
         // Create tables again
         onCreate(db);
@@ -100,6 +116,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     }
+
+
+
 
     public  void deleteData(Context context) {
         DatabaseHelper dbHelper = new DatabaseHelper(context);

@@ -44,10 +44,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         myViewHolder.roomNumber.setText(routineList.get(i).getRoutineRoom());
         myViewHolder.subjectCode.setText(routineList.get(i).getCourseCode());
         myViewHolder.time.setText(routineList.get(i).getRoutineTime());
-        myViewHolder.teacher.setText(routineList.get(i).getTeacherCode());
-
-
-
+        myViewHolder.semester.setText(routineList.get(i).getRoutineSemester());
+        myViewHolder.sectionName.setText(routineList.get(i).getRoutineSection());
 
 
     }
@@ -59,17 +57,18 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView subjectCode,teacher,time,subjectName,roomNumber;
+        TextView subjectCode,semester,time,subjectName,roomNumber,sectionName;
 
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             subjectCode=itemView.findViewById(R.id.subjectId);
-            teacher=itemView.findViewById(R.id.subjectTeacher);
+            semester=itemView.findViewById(R.id.semesterID);
             time=itemView.findViewById(R.id.subjectTime);
             subjectName=itemView.findViewById(R.id.subjectName);
             roomNumber=itemView.findViewById(R.id.roomNumber);
+            sectionName=itemView.findViewById(R.id.sectionName);
 
 
 

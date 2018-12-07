@@ -17,8 +17,10 @@ public class Routine {
     public Routine() {
     }
 
-    public Routine(String teacherCode, String courseName, String routineDay, String routineTime, String routineRoom, String courseCode) {
-        this.teacherCode = teacherCode;
+    public Routine(String routineSemester,String routineBatch, String routineSection, String courseName, String routineDay, String routineTime, String routineRoom, String courseCode) {
+        this.routineSemester = routineSemester;
+        this.routineBatch = routineBatch;
+        this.routineSection = routineSection;
         this.courseName = courseName;
         this.routineDay = routineDay;
         this.routineTime = routineTime;

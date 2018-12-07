@@ -1,5 +1,6 @@
 package me.assaduzzaman.teachersdiary.Notification;
 
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -17,6 +18,17 @@ public class NotificationReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         NotificationManager notificationManager= (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        int notificationId = 100;
+        String channelId = "channel-01";
+        String channelName = "Channel Name";
+        int importance = NotificationManager.IMPORTANCE_HIGH;
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationChannel mChannel = new NotificationChannel(
+                    channelId, channelName, importance);
+            notificationManager.createNotificationChannel(mChannel);
+        }
 
         Intent destinationIntent=new Intent(context, RoutineActivity.class);
         destinationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -37,7 +49,7 @@ public class NotificationReceiver extends BroadcastReceiver {
                 .setAutoCancel(true)
                 .setSound(Sound);
 
-        notificationManager.notify(100,builder.build());
+        notificationManager.notify(notificationId,builder.build());
 
     }
 }

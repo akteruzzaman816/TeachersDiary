@@ -75,14 +75,16 @@ public class DatabaseQueryClass {
                 if (cursor.moveToFirst()) {
                     ArrayList<Routine> routineList = new ArrayList<>();
                     do {
-                        String teacherCode = cursor.getString(cursor.getColumnIndex(Config.COLUMN_TEACHER_CODE));
+                        String semester = cursor.getString(cursor.getColumnIndex(Config.COLUMN_ROUTINE_SEMESTER));
+                        String section = cursor.getString(cursor.getColumnIndex(Config.COLUMN_ROUTINE_SECTION));
+                        String batch = cursor.getString(cursor.getColumnIndex(Config.COLUMN_ROUTINE_BATCH));
                         String subCode = cursor.getString(cursor.getColumnIndex(Config.COLUMN_COURSE_CODE));
                         String time = cursor.getString(cursor.getColumnIndex(Config.COLUMN_ROUTINE_TIME));
                         String room = cursor.getString(cursor.getColumnIndex(Config.COLUMN_ROUTINE_ROOM));
                         String subName = cursor.getString(cursor.getColumnIndex(Config.COLUMN_COURSE_CODE));
                         String day = cursor.getString(cursor.getColumnIndex(Config.COLUMN_ROUTINE_DAY));
 
-                        routineList.add(new Routine(teacherCode,subName,day,time,room,subCode));
+                        routineList.add(new Routine(semester,batch,section,subName,day,time,room,subCode));
                     } while (cursor.moveToNext());
 
                     return routineList;
