@@ -1,18 +1,13 @@
 package me.assaduzzaman.teachersdiary;
-
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -25,25 +20,19 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.data.DataSet;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
-
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
-
 import me.assaduzzaman.teachersdiary.Activity.ProfileActivity;
 import me.assaduzzaman.teachersdiary.Activity.RoutineActivity;
 import me.assaduzzaman.teachersdiary.Activity.SettingsActivity;
-import me.assaduzzaman.teachersdiary.Fragment.FriFragment;
-import me.assaduzzaman.teachersdiary.Fragment.SunFragment;
 import me.assaduzzaman.teachersdiary.LocalDatabase.Config;
 import me.assaduzzaman.teachersdiary.LocalDatabase.DatabaseHelper;
 import me.assaduzzaman.teachersdiary.model.Routine;
@@ -54,8 +43,10 @@ public class MainActivity extends AppCompatActivity
     SharedPreferences sharedPreferences;
     CardView profileCard,noteCard,routineCard,attendanceCard,settingCard,aboutCard;
 
-    TextView dayName,dateName,classStart,classEnd,totalClass;
-    Context context;
+    TextView dayDate,classStart,classEnd,totalClass;
+
+    LinearLayout contentDashboard;
+    TextView scheduleText;
 
 
 
@@ -84,11 +75,16 @@ public class MainActivity extends AppCompatActivity
 
 
         // reference for the Text view...........................
-        dayName=findViewById(R.id.dayName);
-        dateName=findViewById(R.id.date);
+        dayDate=findViewById(R.id.dayDate);
         classStart=findViewById(R.id.classStart);
         classEnd=findViewById(R.id.classEnd);
         totalClass=findViewById(R.id.totalClass);
+
+
+        // Dashboard visibility reference.............
+        contentDashboard=findViewById(R.id.contentDashboard);
+        scheduleText=findViewById(R.id.scheduleText);
+
 
         getDashBoardInfo();
 
@@ -169,32 +165,148 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         String sirCode=preferences.getString("code","0");
 
-        ArrayList<Routine> data= getRoutinetData(sirCode,"Sunday");
-        classStart.setText(data.get(0).getRoutineTime());
-        classEnd.setText(data.get(data.size()-1).getRoutineTime());
-        totalClass.setText(String.valueOf(data.size()));
-
-
         Calendar c = Calendar.getInstance();
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String currentDate=dateFormat.format(c.getTime());
+        c.set(Calendar.DAY_OF_WEEK,7);
+
 
         int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
 
 
         if (Calendar.SATURDAY == dayOfWeek) {
 
+
+
+            dayDate.setText("Saturday"+" - "+currentDate);
+
+            ArrayList<Routine> data= getRoutinetData(sirCode,"Saturday");
+            if (data.size()>0)
+            {
+                classStart.setText(data.get(0).getRoutineTime());
+                classEnd.setText(data.get(data.size()-1).getRoutineTime());
+                totalClass.setText(String.valueOf(data.size()));
+            }
+            else {
+                contentDashboard.setVisibility(View.GONE);
+                scheduleText.setVisibility(View.VISIBLE);
+
+            }
+
+
+
+
         } else if (Calendar.SUNDAY == dayOfWeek) {
+
+            dayDate.setText("Sunday"+" - "+currentDate);
+
+            ArrayList<Routine> data= getRoutinetData(sirCode,"Sunday");
+            if (data.size()>0)
+            {
+                classStart.setText(data.get(0).getRoutineTime());
+                classEnd.setText(data.get(data.size()-1).getRoutineTime());
+                totalClass.setText(String.valueOf(data.size()));
+            }
+            else {
+                contentDashboard.setVisibility(View.GONE);
+                scheduleText.setVisibility(View.VISIBLE);
+
+            }
+
 
 
 
         } else if (Calendar.MONDAY == dayOfWeek) {
 
+            dayDate.setText("Monday"+" - "+currentDate);
+
+            ArrayList<Routine> data= getRoutinetData(sirCode,"Monday");
+            if (data.size()>0)
+            {
+
+                classStart.setText(data.get(0).getRoutineTime());
+                classEnd.setText(data.get(data.size()-1).getRoutineTime());
+                totalClass.setText(String.valueOf(data.size()));
+            }
+            else {
+                contentDashboard.setVisibility(View.GONE);
+                scheduleText.setVisibility(View.VISIBLE);
+
+            }
+
+
         } else if (Calendar.TUESDAY == dayOfWeek) {
+
+            dayDate.setText("Tuesday"+" - "+currentDate);
+
+            ArrayList<Routine> data= getRoutinetData(sirCode,"Tuesday");
+            if (data.size()>0)
+            {
+                classStart.setText(data.get(0).getRoutineTime());
+                classEnd.setText(data.get(data.size()-1).getRoutineTime());
+                totalClass.setText(String.valueOf(data.size()));
+            }
+            else {
+                contentDashboard.setVisibility(View.GONE);
+                scheduleText.setVisibility(View.VISIBLE);
+
+            }
+
 
         } else if (Calendar.WEDNESDAY == dayOfWeek) {
 
+            dayDate.setText("Wednesday"+" - "+currentDate);
+
+            ArrayList<Routine> data= getRoutinetData(sirCode,"Wednesday");
+            if (data.size()>0)
+            {
+                classStart.setText(data.get(0).getRoutineTime());
+                classEnd.setText(data.get(data.size()-1).getRoutineTime());
+                totalClass.setText(String.valueOf(data.size()));
+            }
+            else {
+                contentDashboard.setVisibility(View.GONE);
+                scheduleText.setVisibility(View.VISIBLE);
+
+            }
+
+
         } else if (Calendar.THURSDAY == dayOfWeek) {
 
+            dayDate.setText("Thursday"+" - "+currentDate);
+
+            ArrayList<Routine> data= getRoutinetData(sirCode,"Thursday");
+            if (data.size()>0)
+            {
+                classStart.setText(data.get(0).getRoutineTime());
+                classEnd.setText(data.get(data.size()-1).getRoutineTime());
+                totalClass.setText(String.valueOf(data.size()));
+            }
+            else {
+                contentDashboard.setVisibility(View.GONE);
+                scheduleText.setVisibility(View.VISIBLE);
+
+            }
+
+
         } else if (Calendar.FRIDAY == dayOfWeek) {
+
+            dayDate.setText("Friday"+" - "+currentDate);
+
+            ArrayList<Routine> data= getRoutinetData(sirCode,"Friday");
+            if (data.size()>0)
+            {
+                classStart.setText(data.get(0).getRoutineTime());
+                classEnd.setText(data.get(data.size()-1).getRoutineTime());
+                totalClass.setText(String.valueOf(data.size()));
+            }
+            else {
+                contentDashboard.setVisibility(View.GONE);
+                scheduleText.setVisibility(View.VISIBLE);
+
+            }
+
+
 
         }
 
