@@ -75,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         {
             Intent intent=new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
+            finish();
         }
 
 
@@ -141,6 +142,7 @@ public class LoginActivity extends AppCompatActivity {
                                 progressBar.setVisibility(View.GONE);
                                 Intent intent=new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
+                                finish();
                                 loginButton.setVisibility(View.VISIBLE);
 
 
