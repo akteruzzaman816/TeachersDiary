@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:text="Batch" />
+                android:text="Section" />
 
             <TextView
                 android:layout_below="@id/section"

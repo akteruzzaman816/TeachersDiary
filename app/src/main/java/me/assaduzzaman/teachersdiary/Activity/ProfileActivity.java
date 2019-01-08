@@ -17,6 +17,7 @@ public class ProfileActivity extends AppCompatActivity {
     TextView profileName,
             profileDesignation,
             profileEmail,
+            profilePhone,
             profileFacultyName,
             profileCode;
 
@@ -43,6 +44,7 @@ public class ProfileActivity extends AppCompatActivity {
         profileCode=findViewById(R.id.profileCode);
         profileEmail=findViewById(R.id.profileEmail);
         profileFacultyName=findViewById(R.id.profileFaculty);
+        profilePhone=findViewById(R.id.profilePhone);
 
 
         // getting the information from the sharedPreferences ...................
@@ -50,11 +52,15 @@ public class ProfileActivity extends AppCompatActivity {
         final String name=sharedPreferences.getString("name","0");
         final String email=sharedPreferences.getString("email","0");
         final String code=sharedPreferences.getString("code","0");
+        final String phone=sharedPreferences.getString("phone","0");
+        final String designation=sharedPreferences.getString("designation","0");
 
         // setting the information to the view....
         profileName.setText(name);
         profileEmail.setText(email);
         profileCode.setText(code);
+        profileDesignation.setText(designation);
+        profilePhone.setText(phone);
 
 
     }

@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -102,13 +103,16 @@ public class RoutineActivity extends AppCompatActivity {
 
     public void getData() {
 
+
         if (new NetworkStatus().checkNetworkConnection(RoutineActivity.this)) {
+
 
             allRoutine = new ArrayList<>();
 
             arrayRequest = new JsonArrayRequest(new BaseUrl().getRoutineUrl(), new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
+                    Log.e("Hello","sdfsdfs");
 
                     DatabaseHelper databaseHelper = new DatabaseHelper(RoutineActivity.this);
                     SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
@@ -119,8 +123,12 @@ public class RoutineActivity extends AppCompatActivity {
                         try {
                             if (response.length() > 0) {
 
+
+
                                 jsonObject = response.getJSONObject(i);
+
                                 Routine routine = new Routine();
+
                                 routine.setRoutineID(jsonObject.getInt("routine_id"));
                                 routine.setTeacherCode(jsonObject.getString("teacher_code"));
                                 routine.setCourseName(jsonObject.getString("course_name"));
@@ -135,8 +143,10 @@ public class RoutineActivity extends AppCompatActivity {
                                 routine.setRoutineStatus(jsonObject.getInt("routine_status"));
 
 
+
                                 //saving data........
                                 databaseHelper.saveToLocalDatabase(routine,sqLiteDatabase);
+
 
 
 

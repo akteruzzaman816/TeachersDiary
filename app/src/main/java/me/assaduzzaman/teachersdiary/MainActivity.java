@@ -30,6 +30,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+
+import me.assaduzzaman.teachersdiary.Activity.NoteActivity;
 import me.assaduzzaman.teachersdiary.Activity.ProfileActivity;
 import me.assaduzzaman.teachersdiary.Activity.RoutineActivity;
 import me.assaduzzaman.teachersdiary.Activity.SettingsActivity;
@@ -106,7 +108,8 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
 
-                setCustomAlart();
+                Intent intent=new Intent(MainActivity.this,NoteActivity.class);
+                startActivity(intent);
 
             }
         });

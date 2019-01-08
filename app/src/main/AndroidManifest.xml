@@ -16,10 +16,7 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme" />
-
-        <activity
-            android:name=".Activity.LoginActivity">
-        </activity>
+        <activity android:name=".Activity.LoginActivity" />
         <activity android:name=".Activity.ProfileActivity" />
         <activity android:name=".Activity.RoutineActivity" />
         <activity android:name=".Activity.SettingsActivity" />
@@ -35,6 +32,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activity.NoteActivity" />
+        <activity android:name=".Activity.CreateNoteActivity"></activity>
     </application>
 
 </manifest>

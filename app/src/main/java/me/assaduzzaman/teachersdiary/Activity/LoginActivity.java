@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -127,15 +128,21 @@ public class LoginActivity extends AppCompatActivity {
 
                             if(success.equals("ok"))
                             {
+                                String phone=jsonObject.getString("phone");
+                                String designation=jsonObject.getString("designation");
                                 String name=jsonObject.getString("name");
                                 String teacherCode=jsonObject.getString("code");
+
+
 
                                 sharedPreferences= PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
                                 SharedPreferences.Editor editor=sharedPreferences.edit();
 
                                 editor.putString("email",e);
+                                editor.putString("phone",phone);
                                 editor.putString("name",name);
                                 editor.putString("code",teacherCode);
+                                editor.putString("designation",designation);
                                 editor.putBoolean("firstTime",true);
                                 editor.apply();
 

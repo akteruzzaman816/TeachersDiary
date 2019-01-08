@@ -40,12 +40,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, int i) {
 
-        myViewHolder.subjectName.setText(routineList.get(i).getCourseName());
-        myViewHolder.roomNumber.setText(routineList.get(i).getRoutineRoom());
-        myViewHolder.subjectCode.setText(routineList.get(i).getCourseCode());
         myViewHolder.time.setText(routineList.get(i).getRoutineTime());
         myViewHolder.semester.setText(routineList.get(i).getRoutineSemester());
         myViewHolder.sectionName.setText(routineList.get(i).getRoutineSection());
+        myViewHolder.subjectName.setText(routineList.get(i).getCourseName());
+        myViewHolder.subjectCode.setText(routineList.get(i).getCourseCode());
+        myViewHolder.roomNumber.setText(routineList.get(i).getRoutineRoom());
 
 
     }

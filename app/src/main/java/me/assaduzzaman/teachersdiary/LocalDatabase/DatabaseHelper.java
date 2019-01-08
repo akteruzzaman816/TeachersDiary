@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import me.assaduzzaman.teachersdiary.model.Note;
 import me.assaduzzaman.teachersdiary.model.Routine;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -138,7 +139,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 
+//  for the note..............................
+public void saveNote(Note note, SQLiteDatabase database)
+{
+    ContentValues contentValues = new ContentValues();
+    contentValues.put(Config.COLUMN_NOTE_DETAILS,note.getNoteDetails());
+    contentValues.put(Config.COLUMN_NOTE_DATE,note.getDate());
 
+    database.insert(Config.TABLE_NOTE,null,contentValues);
+
+    Log.e("akter2","saved");
+
+}
 
 
 
