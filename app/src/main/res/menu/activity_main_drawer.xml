@@ -5,37 +5,37 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/profile"
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_person"
             android:title="Profile" />
 
         <item
             android:id="@+id/nav_note"
-            android:icon="@drawable/note"
+            android:icon="@drawable/ic_note"
             android:title="Create Note" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/routine"
+            android:id="@+id/nav_routine"
+            android:icon="@drawable/ic_routine"
             android:title="Class Routine" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/attendence"
+            android:id="@+id/nav_attendance"
+            android:icon="@drawable/ic_attendence"
             android:title="Attendance" />
         <item
-            android:id="@+id/setting"
-            android:icon="@drawable/settings"
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_menu_manage"
             android:title="Setting" />
     </group>
 
     <item android:title="Communicate">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/attendence"
+                android:id="@+id/nav_contact"
+                android:icon="@drawable/ic_contact"
                 android:title="Contact" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/attendence"
+                android:id="@+id/nav_about"
+                android:icon="@drawable/ic_about"
                 android:title="About" />
         </menu>
     </item>

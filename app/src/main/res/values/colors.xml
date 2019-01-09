@@ -7,4 +7,6 @@
     <color name="greyLight">#06767676</color>
     <color name="lightgray">#ededed</color>
     <color name="textColor">#737373</color>
+    <color name="darkPaste">#007170</color>
+
 </resources>

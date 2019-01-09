@@ -42,9 +42,7 @@ import me.assaduzzaman.teachersdiary.model.Routine;
 
 public class RoutineActivity extends AppCompatActivity {
 
-    JsonArrayRequest arrayRequest;
-    RequestQueue requestQueue;
-    ArrayList<Routine> allRoutine;
+
 
 
 
@@ -73,7 +71,7 @@ public class RoutineActivity extends AppCompatActivity {
         }
 
 
-            getData();
+
 
         setviewpager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
@@ -101,103 +99,6 @@ public class RoutineActivity extends AppCompatActivity {
     }
 
 
-    public void getData() {
-
-
-        if (new NetworkStatus().checkNetworkConnection(RoutineActivity.this)) {
-
-
-            allRoutine = new ArrayList<>();
-
-            arrayRequest = new JsonArrayRequest(new BaseUrl().getRoutineUrl(), new Response.Listener<JSONArray>() {
-                @Override
-                public void onResponse(JSONArray response) {
-                    Log.e("Hello","sdfsdfs");
-
-                    DatabaseHelper databaseHelper = new DatabaseHelper(RoutineActivity.this);
-                    SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
-                    databaseHelper.deleteData(RoutineActivity.this);
-
-                    JSONObject jsonObject = null;
-                    for (int i = 0; i < response.length(); i++) {
-                        try {
-                            if (response.length() > 0) {
-
-
-
-                                jsonObject = response.getJSONObject(i);
-
-                                Routine routine = new Routine();
-
-                                routine.setRoutineID(jsonObject.getInt("routine_id"));
-                                routine.setTeacherCode(jsonObject.getString("teacher_code"));
-                                routine.setCourseName(jsonObject.getString("course_name"));
-                                routine.setRoutineDay(jsonObject.getString("routine_day"));
-                                routine.setRoutineFaculty(jsonObject.getString("routine_faculty"));
-                                routine.setRoutineSemester(jsonObject.getString("routine_semester"));
-                                routine.setRoutineSection(jsonObject.getString("routine_section"));
-                                routine.setRoutineTime(jsonObject.getString("routine_time"));
-                                routine.setRoutineRoom(jsonObject.getString("routine_room"));
-                                routine.setRoutineBatch(jsonObject.getString("routine_batch"));
-                                routine.setCourseCode(jsonObject.getString("course_code"));
-                                routine.setRoutineStatus(jsonObject.getInt("routine_status"));
-
-
-
-                                //saving data........
-                                databaseHelper.saveToLocalDatabase(routine,sqLiteDatabase);
-
-
-
-
-//                                routine.setRoutineID(allRoutine.get(0).getRoutineID());
-//                                routine.setTeacherCode(allRoutine.get(1).getTeacherCode());
-//                                routine.setCourseName(allRoutine.get(2).getCourseName());
-//                                routine.setRoutineDay(allRoutine.get(3).getRoutineDay());
-//                                routine.setRoutineFaculty(allRoutine.get(4).getRoutineFaculty());
-//                                routine.setRoutineSemester(allRoutine.get(5).getRoutineSemester());
-//                                routine.setRoutineSection(allRoutine.get(6).getRoutineSection());
-//                                routine.setRoutineTime(allRoutine.get(7).getRoutineTime());
-//                                routine.setRoutineRoom(allRoutine.get(8).getRoutineRoom());
-//                                routine.setRoutineBatch(allRoutine.get(9).getRoutineBatch());
-//                                routine.setCourseCode(allRoutine.get(10).getCourseCode());
-//                                routine.setRoutineStatus(allRoutine.get(11).getRoutineStatus());
-
-
-                                allRoutine.add(routine);
-
-                            }
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                }
-
-
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-
-                }
-            });
-
-            requestQueue= Volley.newRequestQueue(RoutineActivity.this);
-            requestQueue.add(arrayRequest);
-
-        }else
-        {
-            Toast.makeText(this, "No Internet", Toast.LENGTH_SHORT).show();
-        }
-
-
-
-
-
-
-    }
 
 
 

@@ -1,10 +1,14 @@
 package me.assaduzzaman.teachersdiary;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
@@ -31,10 +35,14 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 
+import me.assaduzzaman.teachersdiary.Activity.AboutActivity;
+import me.assaduzzaman.teachersdiary.Activity.ContactActivity;
 import me.assaduzzaman.teachersdiary.Activity.NoteActivity;
 import me.assaduzzaman.teachersdiary.Activity.ProfileActivity;
 import me.assaduzzaman.teachersdiary.Activity.RoutineActivity;
 import me.assaduzzaman.teachersdiary.Activity.SettingsActivity;
+import me.assaduzzaman.teachersdiary.BackgroundService.MyJobService;
+import me.assaduzzaman.teachersdiary.BackgroundService.MyService;
 import me.assaduzzaman.teachersdiary.LocalDatabase.Config;
 import me.assaduzzaman.teachersdiary.LocalDatabase.DatabaseHelper;
 import me.assaduzzaman.teachersdiary.model.Routine;
@@ -89,6 +97,7 @@ public class MainActivity extends AppCompatActivity
 
 
         getDashBoardInfo();
+        backgroundService();
 
 
 
@@ -144,7 +153,8 @@ public class MainActivity extends AppCompatActivity
         aboutCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setCustomAlart();
+                Intent intent=new Intent(MainActivity.this, AboutActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -160,7 +170,27 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    private void backgroundService() {
 
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+        {
+            ComponentName componentName=new ComponentName(MainActivity.this,MyJobService.class);
+            JobInfo info= new JobInfo.Builder(1234,componentName)
+                    .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+                    .setPersisted(true)
+                    .build();
+
+            JobScheduler jobScheduler= (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+            jobScheduler.schedule(info);
+
+        }
+        else
+        {
+            Intent serviceIntent=new Intent(MainActivity.this,MyService.class);
+            startService(serviceIntent);
+        }
+
+    }
 
 
     private void getDashBoardInfo() {
@@ -436,23 +466,29 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_profile) {
             Intent intent=new Intent(MainActivity.this, ProfileActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_routine) {
             Intent intent=new Intent(MainActivity.this, RoutineActivity.class);
             startActivity(intent);
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_note) {
+            Intent intent=new Intent(MainActivity.this, NoteActivity.class);
+            startActivity(intent);
 
-        } else if (id == R.id.setting) {
+        } else if (id == R.id.nav_setting) {
             Intent intent=new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(intent);
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_contact) {
+            Intent intent=new Intent(MainActivity.this, ContactActivity.class);
+            startActivity(intent);
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_about) {
 
+            Intent intent=new Intent(MainActivity.this, AboutActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -17,7 +17,7 @@
     <RelativeLayout
         android:padding="5dp"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
+        android:layout_height="70dp">
 
 
         <Switch
@@ -31,7 +31,14 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:checked="true"
-            android:text="@string/get_notification_everyday" />
+            android:text="@string/get_notification" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/switchNotification"
+            android:layout_below="@+id/switchNotification"
+            android:text="10 minutes before the class start" />
 
         <View
             android:layout_width="match_parent"
@@ -48,18 +55,23 @@
         android:padding="5dp"
         android:id="@+id/set_time"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
+        android:layout_height="60dp">
 
         <TextView
-            android:textStyle="bold"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/reminder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:gravity="center|left"
-            android:text="Set the time for Notification"
-            android:textSize="18sp" />
+            android:text="Set Reminder"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/reminder"
+            android:text="Set reminder for next Day's Schedule" />
 
         <TextView
             android:id="@+id/settingTime"

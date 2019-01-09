@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.SET_ALARM" />
 
     <application
@@ -33,7 +34,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.NoteActivity" />
-        <activity android:name=".Activity.CreateNoteActivity"></activity>
+        <activity android:name=".Activity.CreateNoteActivity" />
+
+        <service android:name=".BackgroundService.MyService" />
+        <service
+            android:name=".BackgroundService.MyJobService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <activity android:name=".Activity.AboutActivity" />
+        <activity android:name=".Activity.ContactActivity"></activity>
     </application>
 
 </manifest>

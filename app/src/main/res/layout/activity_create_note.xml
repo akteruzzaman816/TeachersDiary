@@ -46,11 +46,12 @@
     </RelativeLayout>
 
     <TextView
+        android:gravity="center"
         android:padding="5dp"
         android:id="@+id/noteText"
         android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="i am a text"
+        android:text="Create your Note"
         android:textColor="#243b03" />
 </LinearLayout>
