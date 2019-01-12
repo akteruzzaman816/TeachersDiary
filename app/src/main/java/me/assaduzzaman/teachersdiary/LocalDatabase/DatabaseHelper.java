@@ -148,9 +148,19 @@ public void saveNote(Note note, SQLiteDatabase database)
 
     database.insert(Config.TABLE_NOTE,null,contentValues);
 
-    Log.e("akter2","saved");
 
 }
+
+    public void updateNote(Note note, String id, SQLiteDatabase database)
+    {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Config.COLUMN_NOTE_DETAILS,note.getNoteDetails());
+        contentValues.put(Config.COLUMN_NOTE_DATE,note.getDate());
+
+        database.update(Config.TABLE_NOTE, contentValues, Config.COLUMN_NOTE_ID + " = ?", new String[]{id});
+
+
+    }
 
     public void deleteNote(Context context,String id)
     {

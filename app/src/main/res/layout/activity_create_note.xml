@@ -14,6 +14,7 @@
 
 
         <Button
+            android:layout_marginLeft="8dp"
             android:id="@+id/exit"
             android:padding="5dp"
             android:layout_width="25dp"
@@ -24,19 +25,20 @@
             android:gravity="center" />
 
         <TextView
+            android:id="@+id/titleNote"
             style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="Edit Note"
+            android:text="Create Note"
             android:textColor="@color/white"
             android:textStyle="italic" />
 
 
         <Button
             android:id="@+id/saveNote"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="8dp"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_alignParentEnd="true"
@@ -59,6 +61,7 @@
         android:textStyle="italic" />
 
     <EditText
+        android:background="@android:color/transparent"
         android:gravity="top"
         android:layout_margin="5dp"
         android:padding="10dp"

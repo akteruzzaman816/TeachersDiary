@@ -13,6 +13,7 @@
         android:layout_height="50dp">
 
         <TextView
+            android:maxLength="10"
             android:id="@+id/noteDate"
             android:layout_marginLeft="15dp"
             android:textStyle="bold"

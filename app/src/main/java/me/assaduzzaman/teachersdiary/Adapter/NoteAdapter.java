@@ -1,5 +1,6 @@
 package me.assaduzzaman.teachersdiary.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -32,7 +33,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
     ArrayList<Note> noteList;
 
 
-    public NoteAdapter(Context context, ArrayList<Note> noteList) {
+    public  NoteAdapter(Context context, ArrayList<Note> noteList) {
         this.context = context;
         this.noteList = noteList;
     }
@@ -74,8 +75,12 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
                 Toast.makeText(context, "Clicked"+noteList.get(i).getNoteID(), Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(context, CreateNoteActivity.class);
                 intent.putExtra("details",noteList.get(i).getNoteDetails());
+                intent.putExtra("id",noteList.get(i).getNoteID());
                 intent.putExtra("update","update");
+                intent.putExtra("title","Update Note");
                 context.startActivity(intent);
+                ((Activity)context).finish();
+
 
 
 
@@ -148,7 +153,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
 
     }
 
-    public void refreshAdapter(ArrayList<Note> newList)
+    public  void refreshAdapter(ArrayList<Note> newList)
     {
         noteList.clear();
         noteList.addAll(newList);
