@@ -12,7 +12,6 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            app:layout_scrollFlags="scroll|enterAlways"
             android:id="@+id/toolbarRoutine"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"

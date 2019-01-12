@@ -42,11 +42,11 @@ public class NotificationReceiver extends BroadcastReceiver {
         Uri Sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
 
-        NotificationCompat.Builder builder= new NotificationCompat.Builder(context)
+        NotificationCompat.Builder builder= new NotificationCompat.Builder(context,channelId)
                 .setContentIntent(pendingIntent)
                 .setSmallIcon(R.drawable.logo)
                 .setContentTitle("Teachers's Diary")
-                .setContentText("Be Ready for your Next Class")
+                .setContentText("Be Ready for your Next Classes")
                 .setPriority(Notification.PRIORITY_HIGH)
                 .setAutoCancel(true)
                 .setSound(Sound);

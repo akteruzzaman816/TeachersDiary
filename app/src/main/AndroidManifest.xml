@@ -35,11 +35,7 @@
         </activity>
         <activity android:name=".Activity.NoteActivity" />
 
-        <service android:name=".BackgroundService.MyService" />
-        <service
-            android:name=".BackgroundService.MyJobService"
-            android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
+
 
         <activity android:name=".Activity.AboutActivity" />
         <activity android:name=".Activity.ContactActivity" />
