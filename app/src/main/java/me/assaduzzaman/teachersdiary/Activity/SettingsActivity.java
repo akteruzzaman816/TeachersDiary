@@ -35,6 +35,7 @@ public class SettingsActivity extends AppCompatActivity {
     TextView time;
     SharedPreferences sharedPreferences;
     SharedPreferences retrivePreferences;
+    Boolean check;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +46,23 @@ public class SettingsActivity extends AppCompatActivity {
         TimeChooser=findViewById(R.id.set_time);
         time=findViewById(R.id.settingTime);
 
+        notifySwitch=findViewById(R.id.switchNotification);
+
+
         //get sharedPreferences time information
         retrivePreferences = PreferenceManager.getDefaultSharedPreferences(SettingsActivity.this);
+        sharedPreferences=PreferenceManager.getDefaultSharedPreferences(SettingsActivity.this);
+        SharedPreferences.Editor editor=retrivePreferences.edit();
+        boolean check=sharedPreferences.getBoolean("notification",true);
+
+        if (check)
+        {
+            notifySwitch.setChecked(true);
+        }
+        else
+        {
+            notifySwitch.setChecked(false);
+        }
 
         String preferencesTime=retrivePreferences.getString("pickerTime","0");
         time.setText(preferencesTime);
@@ -67,19 +83,24 @@ public class SettingsActivity extends AppCompatActivity {
 
 
 
-        notifySwitch=findViewById(R.id.switchNotification);
 
         notifySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                sharedPreferences= PreferenceManager.getDefaultSharedPreferences(SettingsActivity.this);
+                SharedPreferences.Editor editor=sharedPreferences.edit();
 
-            if (b)
+            if (isChecked)
             {
-               TimeChooser.setVisibility(View.VISIBLE);
+
+                editor.putBoolean("notification",true);
+                editor.apply();
             }
             else
             {
-               TimeChooser.setVisibility(View.GONE);
+                editor.putBoolean("notification",false);
+                editor.apply();
+
             }
 
 

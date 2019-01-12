@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
+    android:id="@+id/frame"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,11 +8,6 @@
     android:layout_height="match_parent"
     tools:context=".Activity.NoteActivity">
 
-
-    <FrameLayout
-        android:id="@+id/frameNote"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -24,6 +20,7 @@
                 android:background="@color/colorPrimary"
                 android:theme="@style/AppTheme.AppBarOverlay"
                 android:titleTextColor="#ffffff" />
+
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/note"
@@ -52,4 +49,3 @@
 
     </FrameLayout>
 
-</RelativeLayout>

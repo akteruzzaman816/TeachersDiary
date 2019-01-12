@@ -140,11 +140,11 @@ public class MyService extends Service {
 
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
 
-                list.add(new ScheduleTime(
-
-                        cursor.getString(cursor.getColumnIndex(Config.COLUMN_ROUTINE_TIME)),
-                        cursor.getString(cursor.getColumnIndex(Config.COLUMN_COURSE_NAME))
-                ));
+//                list.add(new ScheduleTime(
+//
+//                        cursor.getString(cursor.getColumnIndex(Config.COLUMN_ROUTINE_TIME)),
+//                        cursor.getString(cursor.getColumnIndex(Config.COLUMN_COURSE_NAME))
+//                ));
             }
 
             db.close();

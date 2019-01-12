@@ -1,15 +1,15 @@
 package me.assaduzzaman.teachersdiary.model;
 
 public class Note {
-    private int noteID;
+    private String noteID;
     private String noteDetails;
     private String date;
 
-    public int getNoteID() {
+    public String getNoteID() {
         return noteID;
     }
 
-    public void setNoteID(int noteID) {
+    public void setNoteID(String noteID) {
         this.noteID = noteID;
     }
 
@@ -35,7 +35,7 @@ public class Note {
         this.date = date;
     }
 
-    public Note(int noteID, String noteDetails, String date) {
+    public Note(String noteID, String noteDetails, String date) {
 
         this.noteID = noteID;
         this.noteDetails = noteDetails;

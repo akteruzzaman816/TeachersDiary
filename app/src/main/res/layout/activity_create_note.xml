@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:background="@color/white"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -45,13 +46,26 @@
 
     </RelativeLayout>
 
+
     <TextView
-        android:gravity="center"
-        android:padding="5dp"
-        android:id="@+id/noteText"
-        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/noteTime"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Create your Note"
-        android:textColor="#243b03" />
+        android:layout_height="wrap_content"
+        android:text="Jan 11,2019, 3.33 PM"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        android:textStyle="italic" />
+
+    <EditText
+        android:gravity="top"
+        android:layout_margin="5dp"
+        android:padding="10dp"
+        android:textCursorDrawable="@color/colorPrimary"
+        android:id="@+id/noteDetails"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
 </LinearLayout>

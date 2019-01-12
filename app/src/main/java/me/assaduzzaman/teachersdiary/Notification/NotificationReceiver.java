@@ -1,5 +1,6 @@
 package me.assaduzzaman.teachersdiary.Notification;
 
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -45,7 +46,8 @@ public class NotificationReceiver extends BroadcastReceiver {
                 .setContentIntent(pendingIntent)
                 .setSmallIcon(R.drawable.logo)
                 .setContentTitle("Teachers's Diary")
-                .setContentText("Check out you class Schedule")
+                .setContentText("Be Ready for your Next Class")
+                .setPriority(Notification.PRIORITY_HIGH)
                 .setAutoCancel(true)
                 .setSound(Sound);
 

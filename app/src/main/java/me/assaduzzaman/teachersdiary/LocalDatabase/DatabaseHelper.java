@@ -55,7 +55,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // Create Note tables SQL.......................
         String CREATE_NOTE_TABLE = "CREATE TABLE " + Config.TABLE_NOTE + "("
-                + Config.COLUMN_NOTE_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT , "
+                + Config.COLUMN_NOTE_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + Config.COLUMN_NOTE_TITLE + " TEXT, "
                 + Config.COLUMN_NOTE_DETAILS + " TEXT, "
                 + Config.COLUMN_NOTE_DATE + " TEXT "
@@ -151,6 +151,26 @@ public void saveNote(Note note, SQLiteDatabase database)
     Log.e("akter2","saved");
 
 }
+
+    public void deleteNote(Context context,String id)
+    {
+
+
+        DatabaseHelper dbHelper = new DatabaseHelper(context);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+
+        try {
+
+            db.execSQL("DELETE FROM "+Config.TABLE_NOTE+" WHERE "+Config.COLUMN_NOTE_ID+"='"+id+"'");
+            //db.delete(Config.TABLE_NOTE, Config.COLUMN_NOTE_ID + " = ?", new String[] { id });
+
+        } catch (SQLiteException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 
 
 

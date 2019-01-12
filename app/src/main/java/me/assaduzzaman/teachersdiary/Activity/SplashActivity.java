@@ -109,6 +109,7 @@ public class SplashActivity extends AppCompatActivity {
 
 
                                 //saving data........
+
                                 databaseHelper.saveToLocalDatabase(routine,sqLiteDatabase);
 
 

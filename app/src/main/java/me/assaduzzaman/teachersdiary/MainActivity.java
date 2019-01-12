@@ -1,4 +1,6 @@
 package me.assaduzzaman.teachersdiary;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.ComponentName;
@@ -34,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 import me.assaduzzaman.teachersdiary.Activity.AboutActivity;
 import me.assaduzzaman.teachersdiary.Activity.ContactActivity;
@@ -45,10 +48,15 @@ import me.assaduzzaman.teachersdiary.BackgroundService.MyJobService;
 import me.assaduzzaman.teachersdiary.BackgroundService.MyService;
 import me.assaduzzaman.teachersdiary.LocalDatabase.Config;
 import me.assaduzzaman.teachersdiary.LocalDatabase.DatabaseHelper;
+import me.assaduzzaman.teachersdiary.Network.NetworkStatus;
+import me.assaduzzaman.teachersdiary.Notification.NotificationReceiver;
 import me.assaduzzaman.teachersdiary.model.Routine;
+import me.assaduzzaman.teachersdiary.model.ScheduleTime;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    ArrayList<ScheduleTime>notificationData;
 
     SharedPreferences sharedPreferences;
     CardView profileCard,noteCard,routineCard,attendanceCard,settingCard,aboutCard;
@@ -57,8 +65,7 @@ public class MainActivity extends AppCompatActivity
 
     LinearLayout contentDashboard;
     TextView scheduleText;
-
-
+    Boolean checkk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +79,9 @@ public class MainActivity extends AppCompatActivity
 
       //
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        checkk=sharedPreferences.getBoolean("notification",true);
+
+        Log.e("notify",checkk.toString());
         final String name=sharedPreferences.getString("name","0");
 
 
@@ -97,11 +107,18 @@ public class MainActivity extends AppCompatActivity
 
 
         getDashBoardInfo();
-        backgroundService();
 
 
+        if (new NetworkStatus().checkNetworkConnection(MainActivity.this) && checkk)
+        {
+            setMultipleAlarm();
+            Log.e("notify","checked");
 
 
+        }else
+        {
+
+        }
 
         //click event for the cards..................
         profileCard.setOnClickListener(new View.OnClickListener() {
@@ -170,27 +187,29 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    private void backgroundService() {
 
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-        {
-            ComponentName componentName=new ComponentName(MainActivity.this,MyJobService.class);
-            JobInfo info= new JobInfo.Builder(1234,componentName)
-                    .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
-                    .setPersisted(true)
-                    .build();
 
-            JobScheduler jobScheduler= (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
-            jobScheduler.schedule(info);
-
-        }
-        else
-        {
-            Intent serviceIntent=new Intent(MainActivity.this,MyService.class);
-            startService(serviceIntent);
-        }
-
-    }
+//    private void backgroundService() {
+//
+//        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+//        {
+//            ComponentName componentName=new ComponentName(MainActivity.this,MyJobService.class);
+//            JobInfo info= new JobInfo.Builder(1234,componentName)
+//                    .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+//                    .setPersisted(true)
+//                    .build();
+//
+//            JobScheduler jobScheduler= (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+//            jobScheduler.schedule(info);
+//
+//        }
+//        else
+//        {
+//            Intent serviceIntent=new Intent(MainActivity.this,MyService.class);
+//            startService(serviceIntent);
+//        }
+//
+//    }
 
 
     private void getDashBoardInfo() {
@@ -401,8 +420,6 @@ public class MainActivity extends AppCompatActivity
 
         TextView title = (TextView) view.findViewById(R.id.title);
 
-
-
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -494,6 +511,103 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+
+
+    private ArrayList<ScheduleTime> getTimeData() {
+
+        SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        String sirCode=preferences.getString("code","0");
+
+        DatabaseHelper databaseHelper=new DatabaseHelper(MainActivity.this);
+        SQLiteDatabase db = databaseHelper.getReadableDatabase();
+
+
+        ArrayList<ScheduleTime> list = new ArrayList<>();
+
+        try {
+
+            Cursor cursor = db.rawQuery("select * from "+ Config.TABLE_ROUTINE+" where "
+                    +Config.COLUMN_TEACHER_CODE+"=?" ,new String [] {String.valueOf(sirCode)});
+
+            for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+
+                list.add(new ScheduleTime(
+                        cursor.getString(cursor.getColumnIndex(Config.COLUMN_ROUTINE_DAY)),
+                        cursor.getString(cursor.getColumnIndex(Config.COLUMN_ROUTINE_TIME)),
+                        cursor.getString(cursor.getColumnIndex(Config.COLUMN_COURSE_NAME))
+
+                ));
+            }
+
+            db.close();
+
+        } catch (SQLiteException e) {
+            db.close();
+        }
+
+
+
+        return list;
+
+    }
+
+
+
+
+
+    private void setMultipleAlarm() {
+
+       ArrayList<ScheduleTime> data=getTimeData();
+
+
+
+        AlarmManager [] alarmManagers = new AlarmManager[data.size()];
+        Intent intents[] = new Intent[alarmManagers.length];
+
+        for(int i=0;i<alarmManagers.length;i++){
+
+            intents[i] = new Intent(getApplicationContext(),NotificationReceiver.class);
+      /*
+        Here is very important,when we set one alarm, pending intent id becomes zero
+        but if we want set multiple alarms pending intent id has to be unique so i counter
+        is enough to be unique for PendingIntent
+      */
+            String rTime=data.get(i).getRoutineTime();
+            String[] spilt=rTime.split(":");
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),i,intents[i],0);
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.DAY_OF_WEEK,getDay(data.get(i).getRoutineDay()));
+            calendar.set(Calendar.HOUR_OF_DAY,Integer.parseInt(spilt[0]));
+            calendar.set(Calendar.MINUTE, Integer.parseInt(spilt[1]));
+            calendar.set(Calendar.SECOND,0);
+            calendar.add(Calendar.MINUTE,-10);
+            alarmManagers[i] = (AlarmManager)getApplicationContext().getSystemService(ALARM_SERVICE);
+            alarmManagers[i].set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),pendingIntent);
+
+        }
+
+    }
+
+    public  int getDay(String day)
+    {
+        if(day.equalsIgnoreCase("Monday"))
+            return 2;
+        if(day.equalsIgnoreCase("Tuesday"))
+            return 3;
+        if(day.equalsIgnoreCase("Wednesday"))
+            return 4;
+        if(day.equalsIgnoreCase("Thursday"))
+            return 5;
+        if(day.equalsIgnoreCase("Friday"))
+            return 6;
+        if(day.equalsIgnoreCase("Saturday"))
+            return 7;
+        if(day.equalsIgnoreCase("Sunday"))
+            return 1;
+        return 0;
     }
 
 
