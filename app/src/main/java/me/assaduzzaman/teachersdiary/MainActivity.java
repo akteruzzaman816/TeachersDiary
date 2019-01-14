@@ -44,6 +44,7 @@ import me.assaduzzaman.teachersdiary.Activity.NoteActivity;
 import me.assaduzzaman.teachersdiary.Activity.ProfileActivity;
 import me.assaduzzaman.teachersdiary.Activity.RoutineActivity;
 import me.assaduzzaman.teachersdiary.Activity.SettingsActivity;
+import me.assaduzzaman.teachersdiary.Activity.SplashActivity;
 import me.assaduzzaman.teachersdiary.BackgroundService.MyJobService;
 import me.assaduzzaman.teachersdiary.BackgroundService.MyService;
 import me.assaduzzaman.teachersdiary.LocalDatabase.Config;
@@ -461,6 +462,10 @@ public class MainActivity extends AppCompatActivity
 
         int id = item.getItemId();
         if (id == R.id.actionLogout) {
+          DatabaseHelper  databaseHelper = new DatabaseHelper(MainActivity.this);
+          SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
+          databaseHelper.deleteData(MainActivity.this);
+
             SharedPreferences preferences =PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
             SharedPreferences.Editor editor = preferences.edit();
             editor.clear();
