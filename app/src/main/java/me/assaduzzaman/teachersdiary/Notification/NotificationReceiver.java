@@ -48,8 +48,8 @@ public class NotificationReceiver extends BroadcastReceiver {
                 .setContentTitle("Teachers's Diary")
                 .setContentText("Be Ready for your Next Classes")
                 .setPriority(Notification.PRIORITY_HIGH)
-                .setAutoCancel(true)
-                .setSound(Sound);
+                .setSound(Sound)
+                .setAutoCancel(true);
 
         notificationManager.notify(notificationId,builder.build());
 

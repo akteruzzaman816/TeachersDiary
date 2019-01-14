@@ -80,8 +80,9 @@ public class MainActivity extends AppCompatActivity
       //
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         checkk=sharedPreferences.getBoolean("notification",true);
+        String update=sharedPreferences.getString("update","0");
+        String localData=sharedPreferences.getString("data","0");
 
-        Log.e("notify",checkk.toString());
         final String name=sharedPreferences.getString("name","0");
 
 
@@ -108,13 +109,13 @@ public class MainActivity extends AppCompatActivity
 
         getDashBoardInfo();
 
-
-        if (new NetworkStatus().checkNetworkConnection(MainActivity.this) && checkk)
-        {
-            setMultipleAlarm();
+        if (checkk ) {
             Log.e("notify","checked");
-
-
+            if (update.equals("update") || localData.equals("empty"))
+            {
+                setMultipleAlarm();
+                Log.e("notify","Alarm");
+            }
         }else
         {
 

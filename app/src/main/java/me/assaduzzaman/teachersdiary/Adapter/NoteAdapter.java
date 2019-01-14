@@ -10,7 +10,6 @@ import android.database.sqlite.SQLiteException;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,10 +20,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import me.assaduzzaman.teachersdiary.Activity.CreateNoteActivity;
-import me.assaduzzaman.teachersdiary.Activity.SplashActivity;
 import me.assaduzzaman.teachersdiary.LocalDatabase.Config;
 import me.assaduzzaman.teachersdiary.LocalDatabase.DatabaseHelper;
-import me.assaduzzaman.teachersdiary.MainActivity;
 import me.assaduzzaman.teachersdiary.R;
 import me.assaduzzaman.teachersdiary.model.Note;
 
@@ -72,7 +69,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
         myViewHolder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Clicked"+noteList.get(i).getNoteID(), Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(context, CreateNoteActivity.class);
                 intent.putExtra("details",noteList.get(i).getNoteDetails());
                 intent.putExtra("id",noteList.get(i).getNoteID());

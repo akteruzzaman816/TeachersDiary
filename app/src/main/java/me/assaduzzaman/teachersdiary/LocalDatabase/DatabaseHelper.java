@@ -184,7 +184,23 @@ public void saveNote(Note note, SQLiteDatabase database)
 
 
 
+        public Boolean checkDatabase(SQLiteDatabase database)
+        {
 
+
+            Cursor mCursor = database.rawQuery("SELECT * FROM " + Config.TABLE_ROUTINE, null);
+
+            if (mCursor.moveToFirst())
+            {
+                // DO SOMETHING WITH CURSOR
+                return true;
+
+            } else
+            {
+                // I AM EMPTY
+                return false;
+            }
+        }
 
 
 
